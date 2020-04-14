@@ -1,14 +1,12 @@
 package com.master4.controllers;
 
 
-import com.master4.converter.TagConverter;
 import com.master4.converter.TagFormatter;
 import com.master4.entities.Article;
 import com.master4.entities.Tag;
 import com.master4.exceptions.ResourceNotFoundException;
 import com.master4.services.ArticleService;
 import com.master4.services.TagService;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
