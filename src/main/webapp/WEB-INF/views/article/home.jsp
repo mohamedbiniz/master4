@@ -24,7 +24,6 @@
     <jsp:directive.include file="../layout/header.jsp" />
  <header class="col-lg-12">
     <h1>Tous les articles du Blog</h1>
-
         <div class="col-lg-12">
             <a href="${pageContext.request.contextPath}/article/add" class="btn btn-primary">A
                 jouter Article</a>
@@ -41,7 +40,9 @@
             <c:forEach items="${pageable.content}" var="item">
                 <tr>
                     <td>${item.id}</td>
-                    <td><a href="${pageContext.request.contextPath}/article/view/${item.id}">${item.title}</a></td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/article/view/${item.id}">
+                                ${item.title}</a></td>
                     <td><fmt:formatDate type = "date" value = "${article.created}" /> </td>
                     <td>
                         <a href="${pageContext.request.contextPath}/article/delete/${pageable.number}/${item.id}" class="btn btn-danger"
@@ -57,7 +58,10 @@
         <ul class="pagination">
             <c:choose>
                 <c:when test="${pageable.number !=0 }">
-                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/article/page/${pageable.number-1 }">Previous</a></li>
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="${pageContext.request.contextPath}/article/page/${pageable.number-1 }">
+                            Previous</a></li>
                 </c:when>
             </c:choose>
             <c:forEach begin="0"   end="${pageable.totalPages -1}" var="i">

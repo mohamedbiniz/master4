@@ -14,13 +14,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.beans.PropertyEditorSupport;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,20 +33,14 @@ public class ArticleController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-
         binder.registerCustomEditor(List.class, "tagList",
-                new TagFormatter(List.class,tagService));
-
-        binder.convertIfNecessary(List.class,"tagList");
-
+                new TagFormatter(List.class));
     }
-
-
 
     @GetMapping(value = {"/","/page/{id}"})
     public String home(@PathVariable(name="id",required = false) Optional<Integer> id, ModelMap model)
     {
-            Page<Article> pages = articleService.getAllArticles(id, 1, "id");
+            Page<Article> pages = articleService.getAllArticles(id, 3, "id");
             model.addAttribute("pageable", pages);
         return "article/home";
     }
@@ -70,7 +61,19 @@ public class ArticleController {
 
     @GetMapping("/add/{id}")
     public String edit(@PathVariable("id") long id, ModelMap model) throws ResourceNotFoundException {
-        model.addAttribute("article", articleService.findById(id));
+        Article article=articleService.findByIdWithTags(id);
+        List<Tag> tags=tagService.getAllTags();
+        tags.forEach(e->{
+             article.getTagList().forEach(t->{
+                 if(e.getId() ==t.getId()){
+                     e.setUsed(true);
+                 }
+             });
+        });
+        model.addAttribute("tags", tags);
+
+
+        model.addAttribute("article", articleService.findByIdWithTags(id));
         return "article/add";
     }
 
@@ -82,7 +85,6 @@ public class ArticleController {
             model.addAttribute("article",article);
             return "article/add";
         }
-        System.out.println("Ffvfvf");
         articleService.save(article);
         return "redirect:/article/";
     }

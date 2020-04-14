@@ -46,7 +46,19 @@
                 <label class="form-check-label">
                     Tags
                 </label>
-                <form:checkboxes path="tagList" items="${tags}" itemValue="id" itemLabel="title" />
+
+
+                <c:forEach items="${tags}"   var="tag">
+                    <c:choose>
+                        <c:when test="${tag.used}">
+                                <form:checkbox path="tagList" value="${tag.id}" label="${tag.title}" checked="checked" />
+                        </c:when>
+                        <c:otherwise>
+                            <form:checkbox path="tagList" value="${tag.id}" label="${tag.title}"  />
+                        </c:otherwise>
+                    </c:choose>
+
+                </c:forEach>
                 <form:errors path="tagList" cssClass="alert-danger" />
             </div>
             

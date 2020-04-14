@@ -39,6 +39,10 @@ public class Tag {
     @ManyToMany(mappedBy="tagList")
     List<Article> ArticleList;
 
+
+    @Transient
+    private Boolean used;
+
     public Tag(long id) {
         this.id=id;
     }
