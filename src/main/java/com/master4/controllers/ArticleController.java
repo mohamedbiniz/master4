@@ -38,6 +38,7 @@ public class ArticleController {
     @GetMapping(value = {"/","/page/{id}"})
     public String home(@PathVariable(name="id",required = false) Optional<Integer> id, ModelMap model)
     {
+            System.out.println(id);
             Page<Article> pages = articleService.getAllArticles(id, 3, "id");
             model.addAttribute("pageable", pages);
         return "article/home";
@@ -93,8 +94,10 @@ public class ArticleController {
         return "redirect:/article/page/"+page;
     }
 
-
-
+    @GetMapping("/redirect")
+    public String redirect(String st) {
+        return "redirect:/"+st;
+    }
 
 
 

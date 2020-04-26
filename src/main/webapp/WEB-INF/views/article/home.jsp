@@ -64,7 +64,7 @@
                             Previous</a></li>
                 </c:when>
             </c:choose>
-            <c:forEach begin="0"   end="${pageable.totalPages -1}" var="i">
+            <c:forEach begin="0"   end="${pageable.totalPages}" var="i">
                 <c:choose>
                     <c:when test="${pageable.number ==i }">
                         <li class="page-item disabled"><a class="page-link" href="${pageContext.request.contextPath}/article/page/${i}">${i}</a></li>
