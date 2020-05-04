@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class Test {
     @Autowired
     private ArticleController articleController;
