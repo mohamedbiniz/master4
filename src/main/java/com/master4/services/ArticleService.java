@@ -5,6 +5,7 @@ import com.master4.exceptions.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -20,6 +21,5 @@ public interface ArticleService {
     void deleteById(long id);
 
     Article findByIdWithTags(@Param("id") long id);
-
 
 }

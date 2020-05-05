@@ -4,16 +4,15 @@ package com.master4.aop;
 import com.master4.controllers.ArticleController;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.ModelAndView;
 
 //@Aspect
 //@Component
 public class Test {
     @Autowired
     private ArticleController articleController;
+
+
     @Around("execution(* com.master4.controllers.ArticleController.home(..))")
     public String hello(ProceedingJoinPoint jp) throws Throwable {
         Object[] args=jp.getArgs();
@@ -25,6 +24,7 @@ public class Test {
         }else{
             return articleController.redirect("");
         }
+
     }
 
 

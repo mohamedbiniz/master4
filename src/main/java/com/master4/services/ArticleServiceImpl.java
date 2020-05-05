@@ -2,8 +2,10 @@ package com.master4.services;
 
 
 import com.master4.entities.Article;
+import com.master4.entities.User;
 import com.master4.exceptions.ResourceNotFoundException;
 import com.master4.repositories.ArticleRepository;
+import com.master4.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +24,7 @@ public class ArticleServiceImpl  implements ArticleService{
 
     @Autowired
     private ArticleRepository articleRepository;
-
+    private UserRepository userRepository;
     @Override
     @Transactional
     public Page<Article>  getAllArticles(Optional<Integer> pageNo, Integer pageSize, String sortBy)
@@ -58,6 +61,8 @@ public class ArticleServiceImpl  implements ArticleService{
     public Article findByIdWithTags(long id) {
         return articleRepository.findByIdWithTags(id);
     }
+
+
 
 
 }

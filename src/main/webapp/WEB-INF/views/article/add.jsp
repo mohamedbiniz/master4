@@ -25,6 +25,21 @@
         <form:form method="post" action="${pageContext.request.contextPath}/article/save" modelAttribute="article" >
             <form:input path="id" type="hidden" />
             <div class="form-group">
+                <label class="form-check-label">
+                    User
+                </label>
+
+                <form:select path="user"  class="form-control" id="select">
+                    <c:forEach items="${users}"   var="u">
+                        <option value="${u.id}"> ${u.name}  </option>
+                    </c:forEach>
+                </form:select>
+                <form:errors path="user" cssClass="alert-danger" />
+            </div>
+
+
+
+            <div class="form-group">
                 <label for="title">Titre</label>
                 <form:input path="title" cssClass="form-control"  placeholder="titre" />
                 <form:errors path="title" cssClass="alert-danger" />
@@ -35,6 +50,7 @@
                 <form:errors path="body" cssClass="alert-danger" />
 
             </div>
+
             <div class="form-check">
                 <label class="form-check-label">
                     Publier
@@ -46,15 +62,18 @@
                 <label class="form-check-label">
                     Tags
                 </label>
+                <br/>
 
 
                 <c:forEach items="${tags}"   var="tag">
                     <c:choose>
                         <c:when test="${tag.used}">
-                                <form:checkbox path="tagList" value="${tag.id}" label="${tag.title}" checked="checked" />
+                            <form:checkbox path="tagList" value="${tag.id}" label="${ tag.title }" checked="checked" />
+                            <br/>
                         </c:when>
                         <c:otherwise>
-                            <form:checkbox path="tagList" value="${tag.id}" label="${tag.title}"  />
+                            <form:checkbox path="tagList" value="${tag.id}" label="${ tag.title }"  />
+                            <br/>
                         </c:otherwise>
                     </c:choose>
 
@@ -67,7 +86,7 @@
 
 
 
-            <input type = "submit" value = "Submit"/>
+            <input type = "submit" value = "Submit" class="btn btn-primary"/>
         </form:form>
     </header>
 </div>

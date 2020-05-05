@@ -48,8 +48,9 @@ public class Article {
     @ManyToMany
     @JoinTable(name="articles_tags", joinColumns={@JoinColumn(referencedColumnName="id")}
             , inverseJoinColumns={@JoinColumn(referencedColumnName="id")})
-    List<Tag> tagList;
+    private List<Tag> tagList;
 
+    
 
 
 }

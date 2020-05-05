@@ -15,7 +15,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>javaguides.net</title>
+    <title>Blog</title>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />"
           rel="stylesheet">
     <script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
@@ -30,6 +30,7 @@
         <h1>${article.title}</h1>
         <p>${article.body}</p>
         <p><small>Created: <fmt:formatDate type = "date" value = "${article.created}" /> </small></p>
+        <p> User : <b>${article.user.name}</b>
     </div>
 </div>
 

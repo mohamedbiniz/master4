@@ -7,6 +7,7 @@ import com.master4.entities.Tag;
 import com.master4.exceptions.ResourceNotFoundException;
 import com.master4.services.ArticleService;
 import com.master4.services.TagService;
+import com.master4.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,8 @@ public class ArticleController {
 
     @Autowired
     private TagService tagService;
-
+    @Autowired
+    private UserService userService;
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(List.class, "tagList",
@@ -38,9 +40,9 @@ public class ArticleController {
     @GetMapping(value = {"/","/page/{id}"})
     public String home(@PathVariable(name="id",required = false) Optional<Integer> id, ModelMap model)
     {
-            System.out.println(id);
             Page<Article> pages = articleService.getAllArticles(id, 3, "id");
             model.addAttribute("pageable", pages);
+
         return "article/home";
     }
 
@@ -55,6 +57,7 @@ public class ArticleController {
     public String add(ModelMap model,Article article) {
             model.addAttribute("tags", tagService.getAllTags());
             model.addAttribute("article", article);
+            model.addAttribute("users",userService.getAllUsers());
        return "article/add";
     }
 
@@ -69,9 +72,9 @@ public class ArticleController {
                  }
              });
         });
+
         model.addAttribute("tags", tags);
-
-
+        model.addAttribute("users",userService.getAllUsers());
         model.addAttribute("article", articleService.findByIdWithTags(id));
         return "article/add";
     }
@@ -84,6 +87,7 @@ public class ArticleController {
             model.addAttribute("article",article);
             return "article/add";
         }
+
         articleService.save(article);
         return "redirect:/article/";
     }
@@ -94,10 +98,13 @@ public class ArticleController {
         return "redirect:/article/page/"+page;
     }
 
+
     @GetMapping("/redirect")
     public String redirect(String st) {
         return "redirect:/"+st;
     }
+
+
 
 
 

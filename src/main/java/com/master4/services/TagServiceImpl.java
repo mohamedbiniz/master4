@@ -53,7 +53,7 @@ public class TagServiceImpl implements TagService{
     @Transactional
     public void save(Tag tag) {
          Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-         tag.setCreated(timestamp);
+         //tag.setCreated(timestamp);
          tagRepository.save(tag);
     }
 
