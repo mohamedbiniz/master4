@@ -7,7 +7,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// spring context
 public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle (HttpServletRequest request,
@@ -15,14 +14,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                               Object handler) throws Exception {
         RequestMapping rm = ((HandlerMethod) handler).getMethodAnnotation(
                 RequestMapping.class);
-
         boolean alreadyLoggedIn = request.getSession()
                 .getAttribute("user") != null;
+        boolean loginPageRequested = rm != null && rm.value().length > 0
+                && "login".equals(rm.value()[0]);
 
-        if (alreadyLoggedIn ) {
-            response.sendRedirect(request.getContextPath() +rm.value()[0]);
+        if (alreadyLoggedIn && loginPageRequested) {
+            response.sendRedirect(request.getRequestURI());
             return false;
-        } else if (!alreadyLoggedIn) {
+        } else if (!alreadyLoggedIn && !loginPageRequested) {
 
             response.sendRedirect(request.getContextPath() + "/login");
             return false;
