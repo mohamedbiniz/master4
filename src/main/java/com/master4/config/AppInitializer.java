@@ -21,8 +21,8 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         return new String[]{"/"};
     }
 
-    @Override
+    /*@Override
     protected Filter[] getServletFilters() {
         return new Filter[]{new LogFilter()};
-    }
+    }*/
 }
