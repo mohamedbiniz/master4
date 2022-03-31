@@ -29,7 +29,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <springmvc.v>5.2.4.RELEASE</springmvc.v>
+    <springmvc.v>5.3.18</springmvc.v>
     <hibernatecore>5.4.12.Final</hibernatecore>
     <hibernate.validator>6.0.18.Final</hibernate.validator>
     <servlets.version>4.0.1</servlets.version>
